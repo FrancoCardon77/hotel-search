@@ -12,6 +12,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class SearchMapperTest {
 
@@ -40,6 +41,18 @@ class SearchMapperTest {
                 () -> assertEquals(LocalDate.of(2024, 7, 20), result.checkOut()),
                 () -> assertEquals(List.of(30, 29), result.ages())
         );
+    }
+
+    @Test
+    void testToDomain_checkInAfterCheckOut() {
+        SearchRequest request = new SearchRequest(
+                "HOTEL1",
+                LocalDate.of(2024, 7, 20),
+                LocalDate.of(2024, 7, 15),
+                List.of(30)
+        );
+
+        assertThrows(IllegalArgumentException.class, () -> mapper.toDomain(request));
     }
 
     @Test

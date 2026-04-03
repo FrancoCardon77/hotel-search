@@ -126,6 +126,9 @@ class SearchControllerTest {
                 "ages", List.of(30)
         );
 
+        when(searchMapper.toDomain(any(SearchRequest.class)))
+                .thenThrow(new IllegalArgumentException("checkIn must be before checkOut"));
+
         mockMvc.perform(post("/search")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(body)))
