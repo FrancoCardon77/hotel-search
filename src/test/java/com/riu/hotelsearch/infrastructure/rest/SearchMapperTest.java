@@ -1,5 +1,6 @@
 package com.riu.hotelsearch.infrastructure.rest;
 
+import com.riu.hotelsearch.domain.exception.InvalidSearchDatesException;
 import com.riu.hotelsearch.domain.model.Search;
 import com.riu.hotelsearch.domain.model.SearchCount;
 import com.riu.hotelsearch.infrastructure.rest.dto.CountResponse;
@@ -52,7 +53,7 @@ class SearchMapperTest {
                 List.of(30)
         );
 
-        assertThrows(IllegalArgumentException.class, () -> mapper.toDomain(request));
+        assertThrows(InvalidSearchDatesException.class, () -> mapper.toDomain(request));
     }
 
     @Test

@@ -3,7 +3,7 @@ package com.riu.hotelsearch.infrastructure.messaging;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.riu.hotelsearch.domain.model.Search;
-import com.riu.hotelsearch.domain.ports.out.SearchRepository;
+import com.riu.hotelsearch.domain.ports.in.PersistSearchUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +18,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
@@ -26,7 +28,7 @@ import static org.mockito.Mockito.verify;
 class KafkaSearchConsumerTest {
 
     @Mock
-    private SearchRepository repository;
+    private PersistSearchUseCase persistSearchUseCase;
 
     @Spy
     private ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
@@ -46,7 +48,7 @@ class KafkaSearchConsumerTest {
         consumer.consume(validMessage);
 
         ArgumentCaptor<Search> captor = ArgumentCaptor.forClass(Search.class);
-        verify(repository).save(captor.capture());
+        verify(persistSearchUseCase).persist(captor.capture());
         Search saved = captor.getValue();
 
         assertAll(
@@ -62,6 +64,13 @@ class KafkaSearchConsumerTest {
     void testConsume_invalidJson() {
         consumer.consume("not-valid-json");
 
-        verify(repository, never()).save(any());
+        verify(persistSearchUseCase, never()).persist(any());
+    }
+
+    @Test
+    void testConsume_persistenceFailure() {
+        doThrow(new RuntimeException("DB down")).when(persistSearchUseCase).persist(any());
+
+        assertThrows(RuntimeException.class, () -> consumer.consume(validMessage));
     }
 }

@@ -1,6 +1,7 @@
 package com.riu.hotelsearch.infrastructure.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.riu.hotelsearch.domain.exception.InvalidSearchDatesException;
 import com.riu.hotelsearch.domain.model.Search;
 import com.riu.hotelsearch.domain.ports.in.SearchUseCase;
 import com.riu.hotelsearch.infrastructure.rest.dto.SearchRequest;
@@ -127,7 +128,7 @@ class SearchControllerTest {
         );
 
         when(searchMapper.toDomain(any(SearchRequest.class)))
-                .thenThrow(new IllegalArgumentException("checkIn must be before checkOut"));
+                .thenThrow(new InvalidSearchDatesException());
 
         mockMvc.perform(post("/search")
                         .contentType(MediaType.APPLICATION_JSON)
