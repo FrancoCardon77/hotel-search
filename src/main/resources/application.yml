@@ -25,5 +25,10 @@ spring:
       group-id: hotel-search-group
       auto-offset-reset: earliest
 
+app:
+  kafka:
+    topics:
+      searches: ${KAFKA_TOPIC_SEARCHES:hotel_availability_searches}
+
 server:
   port: 8080

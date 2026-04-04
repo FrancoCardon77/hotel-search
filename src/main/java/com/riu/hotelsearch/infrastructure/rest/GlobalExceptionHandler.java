@@ -1,5 +1,6 @@
 package com.riu.hotelsearch.infrastructure.rest;
 
+import com.riu.hotelsearch.domain.exception.InvalidSearchDatesException;
 import com.riu.hotelsearch.domain.exception.SearchNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -23,8 +24,8 @@ public class GlobalExceptionHandler {
                 .body(Map.of("message", ex.getMessage()));
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<Map<String, String>> handleIllegalArgument(IllegalArgumentException ex) {
+    @ExceptionHandler(InvalidSearchDatesException.class)
+    public ResponseEntity<Map<String, String>> handleInvalidSearchDates(InvalidSearchDatesException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Map.of("message", ex.getMessage()));
     }
