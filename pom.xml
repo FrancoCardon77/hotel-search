@@ -100,15 +100,6 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
-                <configuration>
-                    <excludes>
-                        <exclude>com/riu/hotelsearch/domain/model/**</exclude>
-                        <exclude>com/riu/hotelsearch/domain/ports/**</exclude>
-                        <exclude>com/riu/hotelsearch/HotelSearchApplication.class</exclude>
-                        <exclude>com/riu/hotelsearch/infrastructure/rest/dto/**</exclude>
-                        <exclude>com/riu/hotelsearch/infrastructure/config/**</exclude>
-                    </excludes>
-                </configuration>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
