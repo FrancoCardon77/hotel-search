@@ -1,26 +1,18 @@
 package com.riu.hotelsearch.application;
 
+import com.riu.hotelsearch.application.ports.SearchUseCase;
 import com.riu.hotelsearch.domain.model.Search;
-import com.riu.hotelsearch.domain.ports.in.SearchUseCase;
 import com.riu.hotelsearch.domain.ports.out.SearchEventPublisher;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-/**
- * Generates a unique ID for the search, attaches it to the domain object,
- * and delegates publishing to the event bus.
- *
- * <p>The ID is assigned here rather than in the controller or the database
- * so the caller receives it synchronously while persistence happens
- * asynchronously through the Kafka consumer.</p>
- */
-@Service
-@RequiredArgsConstructor
 public class SearchService implements SearchUseCase {
 
     private final SearchEventPublisher publisher;
+
+    public SearchService(SearchEventPublisher publisher) {
+        this.publisher = publisher;
+    }
 
     @Override
     public String search(Search search) {
