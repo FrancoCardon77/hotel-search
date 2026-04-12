@@ -21,7 +21,7 @@ public class KafkaSearchPublisher implements SearchEventPublisher {
     public void publish(Search search) {
         try {
             String payload = objectMapper.writeValueAsString(search);
-            kafkaTemplate.send(kafkaProperties.getTopics().getSearches(), search.searchId(), payload);
+            kafkaTemplate.send(kafkaProperties.topics().searches(), search.searchId(), payload);
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Failed to serialize search event", e);
         }
