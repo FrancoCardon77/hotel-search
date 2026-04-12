@@ -8,11 +8,12 @@ import java.time.LocalDate;
 
 public interface SearchJpaRepository extends JpaRepository<SearchEntity, String> {
 
-    @Query(value = "SELECT COUNT(*) FROM searches s WHERE s.hotel_id = :hotelId AND s.check_in = :checkIn AND s.check_out = :checkOut AND s.ages = :ages", nativeQuery = true)
+    @Query("SELECT COUNT(s) FROM SearchEntity s WHERE s.hotelId = :hotelId " +
+           "AND s.checkIn = :checkIn AND s.checkOut = :checkOut AND s.agesHash = :agesHash")
     long countBySearchFields(
             @Param("hotelId") String hotelId,
             @Param("checkIn") LocalDate checkIn,
             @Param("checkOut") LocalDate checkOut,
-            @Param("ages") String ages
+            @Param("agesHash") Integer agesHash
     );
 }

@@ -1,7 +1,5 @@
 package com.riu.hotelsearch.infrastructure.persistence;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.riu.hotelsearch.domain.model.Search;
 import com.riu.hotelsearch.domain.ports.out.SearchRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +13,6 @@ import java.util.Optional;
 public class SearchRepositoryAdapter implements SearchRepository {
 
     private final SearchJpaRepository jpaRepository;
-    private final ObjectMapper objectMapper;
 
     @Override
     public void save(Search search) {
@@ -33,7 +30,7 @@ public class SearchRepositoryAdapter implements SearchRepository {
                 search.hotelId(),
                 search.checkIn(),
                 search.checkOut(),
-                serializeAges(search.ages())
+                computeAgesHash(search.ages())
         );
     }
 
@@ -43,7 +40,8 @@ public class SearchRepositoryAdapter implements SearchRepository {
                 search.hotelId(),
                 search.checkIn(),
                 search.checkOut(),
-                search.ages()
+                search.ages(),
+                computeAgesHash(search.ages())
         );
     }
 
@@ -57,11 +55,7 @@ public class SearchRepositoryAdapter implements SearchRepository {
         );
     }
 
-    private String serializeAges(List<Integer> ages) {
-        try {
-            return objectMapper.writeValueAsString(ages);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Failed to serialize ages", e);
-        }
+    private Integer computeAgesHash(List<Integer> ages) {
+        return ages != null ? ages.hashCode() : 0;
     }
 }
