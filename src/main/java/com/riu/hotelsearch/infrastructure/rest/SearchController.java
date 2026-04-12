@@ -1,6 +1,6 @@
 package com.riu.hotelsearch.infrastructure.rest;
 
-import com.riu.hotelsearch.domain.ports.in.SearchUseCase;
+import com.riu.hotelsearch.application.ports.SearchUseCase;
 import com.riu.hotelsearch.infrastructure.rest.dto.SearchRequest;
 import com.riu.hotelsearch.infrastructure.rest.dto.SearchResponse;
 import io.swagger.v3.oas.annotations.Operation;

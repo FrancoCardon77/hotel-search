@@ -3,7 +3,7 @@ package com.riu.hotelsearch.infrastructure.messaging;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.riu.hotelsearch.domain.model.Search;
-import com.riu.hotelsearch.domain.ports.in.PersistSearchUseCase;
+import com.riu.hotelsearch.application.ports.PersistSearchUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;

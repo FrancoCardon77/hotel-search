@@ -1,4 +1,4 @@
-package com.riu.hotelsearch.domain.ports.in;
+package com.riu.hotelsearch.application.ports;
 
 import com.riu.hotelsearch.domain.model.Search;
 

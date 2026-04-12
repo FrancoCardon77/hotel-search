@@ -1,6 +1,6 @@
 package com.riu.hotelsearch.infrastructure.rest;
 
-import com.riu.hotelsearch.domain.ports.in.CountUseCase;
+import com.riu.hotelsearch.application.ports.CountUseCase;
 import com.riu.hotelsearch.infrastructure.rest.dto.CountResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
