@@ -3,7 +3,7 @@ package com.riu.hotelsearch.infrastructure.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.riu.hotelsearch.domain.exception.InvalidSearchDatesException;
 import com.riu.hotelsearch.domain.model.Search;
-import com.riu.hotelsearch.domain.ports.in.SearchUseCase;
+import com.riu.hotelsearch.application.ports.SearchUseCase;
 import com.riu.hotelsearch.infrastructure.rest.dto.SearchRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

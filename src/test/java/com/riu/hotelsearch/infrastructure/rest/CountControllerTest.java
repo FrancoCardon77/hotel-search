@@ -3,7 +3,7 @@ package com.riu.hotelsearch.infrastructure.rest;
 import com.riu.hotelsearch.domain.exception.SearchNotFoundException;
 import com.riu.hotelsearch.domain.model.Search;
 import com.riu.hotelsearch.domain.model.SearchCount;
-import com.riu.hotelsearch.domain.ports.in.CountUseCase;
+import com.riu.hotelsearch.application.ports.CountUseCase;
 import com.riu.hotelsearch.infrastructure.rest.dto.CountResponse;
 import com.riu.hotelsearch.infrastructure.rest.dto.SearchDetail;
 import org.junit.jupiter.api.BeforeEach;

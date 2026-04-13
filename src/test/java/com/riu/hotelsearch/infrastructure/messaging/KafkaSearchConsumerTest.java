@@ -3,7 +3,7 @@ package com.riu.hotelsearch.infrastructure.messaging;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.riu.hotelsearch.domain.model.Search;
-import com.riu.hotelsearch.domain.ports.in.PersistSearchUseCase;
+import com.riu.hotelsearch.application.ports.PersistSearchUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
